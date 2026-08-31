@@ -1,0 +1,27 @@
+.admin-layout {
+    // width: 100%;
+    height: 100vh;
+    // padding-top: 97.96px;
+    overflow: hidden;
+}
+.admin-body {
+    // width: 100%;
+    height: calc(100vh - 97.96px);
+    margin-top: 97.96px;
+    display: flex;
+}
+.admin-content {
+    flex: 1;
+    overflow-y: auto;
+    .title {
+        padding: 20px 30px;
+        border-bottom: 1px solid #eee;
+        h3 {
+            font-size: 30px;
+            font-weight: 800;
+        }
+    }
+    .contents {
+        padding: 20px 30px;
+    }
+}

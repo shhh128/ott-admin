@@ -1,0 +1,119 @@
+.grid-wrap {
+    display: grid;
+    row-gap: 20px;
+    column-gap: 20px;
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.box {
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    &.pie h5, &.bar h5, &.line h5 {
+        font-weight: 600;
+        padding-bottom: 30px;
+    }
+    &.pie {
+        grid-row: 2 / span 3;
+        grid-column: 1 / span 1;
+    }
+    &.bar {
+        grid-row: 2 / span 3;
+        grid-column: 2 / span 1;
+    }
+    &.line {
+        grid-row: 2 / span 3;
+        grid-column: 3 / span 2;
+    }
+}
+.box-title {
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+    .icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        padding: 5px;
+        color: #fff;
+        &.c {
+            background-color: #ff0000;
+            // background-color: #f77373;
+        }
+        &.o {
+            background-color: #ff8c00;
+            // background-color: #f7b773;
+        }
+        &.u {
+            background-color: #128800;
+            // background-color: #85e576;
+        }
+        &.n {
+            background-color: #005acf;
+            // background-color: #8dcaea;
+        }
+    }
+    h5 {
+        font-weight: 600;
+        padding-left: 5px;
+    }
+}
+.box-contents {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p {
+        font-size: 20px;
+        font-weight: 700;
+    }
+}
+.shortcut {
+    color: #ccc;
+}
+.info-wrap {
+    position: relative;
+    align-self: flex-start;
+    &:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+.info-btn {
+    display: flex;
+    align-items: flex-start;
+    border: 0;
+    background-color: transparent;
+    color: #bbb;
+    cursor: pointer;
+    padding-left: 1px;
+    .info-icon {
+        width: 11px;
+        height: 11px;
+    }
+}
+.tooltip {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    background-color: #fff;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    padding: 5px;
+    transform: translateX(-50%) translateY(0);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+    p {
+        font-size: 10px;
+        white-space: nowrap;
+    }
+}
+.chart-wrap {
+    flex: 1;
+    min-height: 0;
+}
+.top-wrap {
+    
+}
