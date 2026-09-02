@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import AdminLayout from './layouts/AdminLayout';
 import Dashboard from './pages/Dashboard/Dashboard';
-import Content from './pages/Content/Content';
+import ContentList from './pages/Content/ContentList';
 
 function App() {
 
@@ -16,7 +16,7 @@ function App() {
         <Route element={<AdminLayout />}>
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/content' element={<Content />} />
+          <Route path='/content' element={<ContentList />} />
         </Route>
       </Routes>
 
