@@ -22,7 +22,7 @@
     border: 1px solid #aaa;
     display: flex;
     align-items: center;
-    // justify-content: space-between;
+    flex-wrap: wrap;
     gap: 10px;
     flex-wrap: wrap;
     input, select, button {
@@ -33,6 +33,7 @@
 }
 .search-box {
     position: relative;
+    flex: 2 1 300px;
     .search-icon {
         position: absolute;
         left: 12px;
@@ -41,17 +42,28 @@
         pointer-events: none;
     }
     input {
+        width: 100%;
         padding: 0 12px 0 40px;
         border: 1px solid #ccc;
     }
 }
 .filter-box {
+    position: relative;
+    flex: 1 1 150px;
     select {
-        min-width: 150px;
-        // padding: 0 12px;
+        width: 100%;
+        padding: 0 40px 0 12px;
         border: 1px solid #ccc;
         color: #333;
         cursor: pointer;
+        appearance: none;
+    }
+    .arrow-down, .select-arrow {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
     }
 }
 .search-btn, .reset-btn {
@@ -60,24 +72,80 @@
     justify-content: center;
     flex-shrink: 0;
     cursor: pointer;
-    transition: background-color 0.2s;
 }
 .search-btn {
-    width: 90px;
+    flex: 0 0 90px;
     border: 1px solid #333;
     background-color: #333;
     color: #fff;
     font-weight: 600;
+    transition: background-color 0.2s;
     &:hover {
         background-color: #222;
     }
 }
 .reset-btn {
-    width: 44px;
-    border: 1px solid #ccc;
-    background-color: #fff;
+    flex: 0 0 44px;
+    border: 0;
+    background-color: transparent;
     color: #555;
+}
+.content-list {
+    margin-top: 30px;
+}
+.list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.header-l {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    p {
+        font-weight: 600;
+    }
+    strong {
+        vertical-align: baseline;
+        color: #e50914;
+    }
+}
+.delete-btn {
+    padding: 7px 12px;
+    border: 0;
+    background-color: #fff;
+    color: #333;
+    font-weight: 800;
+    cursor: pointer;
     &:hover {
         background-color: #eee;
+        transition: background-color 0.2s;
+    }
+}
+.header-r {
+    flex: none;
+    width: 130px;
+    flex-shrink: 0;
+    select {
+        padding-right: 35px;
+        height: 35px;
+        border-radius: 5px;
+    }
+}
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    th {
+        padding: 14px 12px;
+        border-bottom: 1px solid #ddd;
+        background-color: #f5f5f5;
+        font-weight: 600;
+        text-align: center;
+    }
+    td {
+        padding: 14px 0;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
     }
 }
