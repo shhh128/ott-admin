@@ -1,7 +1,63 @@
 import { ChevronDown, Plus, RotateCcw, Search } from 'lucide-react';
 import './Content.scss';
 import { Link } from 'react-router-dom';
+import contents from '../../mock/contents.json';
+import { useState } from 'react';
+import Pagination from '../../components/common/Pagination/Pagination';
+
 export default function ContentList() {
+    const [searchTitle, setSearchTitle] = useState('');
+    const [appliedTitle, setAppliedTitle] = useState('');
+
+    const [selectedType, setSelectedType] = useState('ALL');
+    const [selectedStatus, setSelectedStatus] = useState('ALL');
+
+    const [appliedType, setAppliedType] = useState('ALL');
+    const [appliedStatus, setAppliedStatus] = useState('ALL');
+
+    const [sortOrder, setSortOrder] = useState('CREATED');
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
+    const filteredContents = contents.filter((content)=>{
+        const matchesTitle = content.title 
+            .replace(/\s+/g, '')
+            .toLowerCase()
+            .includes(appliedTitle.trim().toLowerCase());
+
+        const matchesType =
+            appliedType === 'ALL' || content.type === appliedType;
+
+        const matchesStatus =
+            appliedStatus === 'ALL' || content.status === appliedStatus;
+
+        return matchesTitle && matchesType && matchesStatus;
+    });
+
+    const sortedContents = [...filteredContents].sort((a, b)=>{
+        if (sortOrder === 'TITLE'){
+            return a.title.localeCompare(b.title, 'ko');
+        }
+
+        const dateKey = 
+            sortOrder === 'RELEASE' ? 'releaseDate' : 'createdAt';
+
+        return (
+            new Date(b[dateKey]).getTime() - 
+            new Date(a[dateKey]).getTime()
+        )
+    });
+
+    const totalPages = Math.ceil(sortedContents.length / itemsPerPage);
+    
+    const startIndex = (currentPage - 1) * itemsPerPage;
+
+    const currentContents = sortedContents.slice(
+        startIndex,
+        startIndex + itemsPerPage
+    );
+
     return(
         <div className="content-wrap">
             <div className="title">
@@ -18,6 +74,19 @@ export default function ContentList() {
                     className="content-search"
                     onSubmit={(e)=>{
                         e.preventDefault();
+                        setAppliedTitle(searchTitle);
+                        setAppliedType(selectedType);
+                        setAppliedStatus(selectedStatus);
+                        setCurrentPage(1);
+                    }}
+                    onReset={()=>{
+                        setSearchTitle('');
+                        setSelectedType('ALL');
+                        setSelectedStatus('ALL');
+                        setAppliedTitle('');
+                        setAppliedType('ALL');
+                        setAppliedStatus('ALL');
+                        setCurrentPage(1);
                     }}
                 >
                     <div className="search-box">
@@ -29,6 +98,8 @@ export default function ContentList() {
                             name='title'
                             type="search"
                             placeholder='제목을 입력하세요.'
+                            value={searchTitle}
+                            onChange={(e)=>setSearchTitle(e.target.value)}
                         />
                     </div>
                     <div className="filter-box">
@@ -36,7 +107,8 @@ export default function ContentList() {
                         <select 
                             id="content-type"
                             name="type"
-                            defaultValue="ALL"
+                            value={selectedType}
+                            onChange={(e)=>setSelectedType(e.target.value)}
                         >
                             <option value="ALL">전체 종류</option>
                             <option value="MOVIE">영화</option>
@@ -53,7 +125,8 @@ export default function ContentList() {
                         <select 
                             id="content-status"
                             name="status" 
-                            defaultValue="ALL"
+                            value={selectedStatus}
+                            onChange={(e)=>setSelectedStatus(e.target.value)}
                         >
                             <option value="ALL">전체 상태</option>
                             <option value="PUBLIC">공개</option>
@@ -78,7 +151,7 @@ export default function ContentList() {
                 <div className="content-list">
                     <div className="list-header">
                         <div className="header-l">
-                            <p>총 <strong>0</strong>개의 콘텐츠</p>
+                            <p>총 <strong>{filteredContents.length}</strong>개의 콘텐츠</p>
                             <button
                                 type='button'
                                 className='delete-btn'
@@ -92,9 +165,14 @@ export default function ContentList() {
                             <select 
                                 id="content-sort"
                                 name="sort" 
-                                defaultValue="LATEST"
+                                value={sortOrder}
+                                onChange={(e)=>{
+                                    setSortOrder(e.target.value);
+                                    setCurrentPage(1);
+                                }}
                             >
-                                <option value="LATEST">최신순</option>
+                                <option value="CREATED">등록일순</option>
+                                <option value="RELEASE">공개일순</option>
                                 <option value="TITLE">제목순</option>
                             </select>
                             <ChevronDown 
@@ -104,58 +182,106 @@ export default function ContentList() {
                             />
                         </div>
                     </div>
-                    <table className='content-table'>
-                        <thead>
-                            <tr>
-                                <th scope='col'>
-                                    <input 
-                                        type="checkbox" 
-                                        aria-label='현재 페이지 콘텐츠 전체 선택'
-                                    />
-                                </th>
-                                <th scope='col'>번호</th>
-                                <th scope='col'>썸네일</th>
-                                <th scope='col'>종류</th>
-                                <th scope='col'>제목</th>
-                                <th scope='col'>장르</th>
-                                <th scope='col'>공개일</th>
-                                <th scope='col'>상태</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <input 
-                                        type="checkbox" 
-                                        aria-label='프렌즈 선택'
-                                    />
-                                </td>
-                                <td>1</td>
-                                <td>
-                                    <Link to="/content/1/edit" aria-label='프렌즈 수정'>
-                                        <img 
-                                            className='content-thumbnail'
-                                            src="" 
-                                            alt="" 
+                    <div className="content-table-wrap">
+                        <table className='content-table'>
+                            <colgroup>
+                                <col className='col-check' />
+                                <col className='col-number' />
+                                <col className='col-thumbnail' />
+                                <col className='col-type' />
+                                <col className='col-title' />
+                                <col className='col-genre' />
+                                <col className='col-date' />
+                                <col className='col-status' />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope='col'>
+                                        <input 
+                                            type="checkbox" 
+                                            aria-label='현재 페이지 콘텐츠 전체 선택'
                                         />
-                                    </Link>
-                                </td>
-                                <td>시리즈</td>
-                                <td className='content-title'>
-                                    <Link to="/content/1/edit">
-                                        프렌즈
-                                    </Link>
-                                </td>
-                                <td>시트콤, 코미디</td>
-                                <td>2026.08.25</td>
-                                <td>
-                                    <span className='content-status is-public'>
-                                        공개
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    </th>
+                                    <th scope='col'>번호</th>
+                                    <th scope='col'>썸네일</th>
+                                    <th scope='col'>종류</th>
+                                    <th scope='col'>제목</th>
+                                    <th scope='col'>장르</th>
+                                    <th scope='col'>공개일</th>
+                                    <th scope='col'>상태</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filteredContents.length === 0 ? (
+                                    <tr>
+                                        <td colSpan={8} className='empty-message'>
+                                            검색 조건에 맞는 콘텐츠가 없습니다.
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    currentContents.map((content, index)=>(
+                                        <tr key={content.id}>
+                                            <td>
+                                                <input 
+                                                    type="checkbox" 
+                                                    aria-label={`${content.title} 선택`}
+                                                />
+                                            </td>
+                                            <td>{startIndex + index + 1}</td>
+                                            <td>
+                                                <Link to={`/content/${content.id}/edit`} aria-label={`${content.title} 수정`}>
+                                                    <img 
+                                                        className='content-thumbnail'
+                                                        src={content.thumbnail} 
+                                                        alt={`${content.title} 썸네일`} 
+                                                    />
+                                                </Link>
+                                            </td>
+                                            <td>
+                                                {content.type === 'MOVIE' ? '영화' : '시리즈'}
+                                            </td>
+                                            <td className='content-title'>
+                                                <Link 
+                                                    to={`/content/${content.id}/edit`}
+                                                    className='content-title-link'
+                                                    title={content.title}
+                                                >
+                                                    {content.title}
+                                                </Link>
+                                            </td>
+                                            <td>
+                                                <span
+                                                    className='content-genres'
+                                                    title={content.genres.join(', ')}
+                                                >
+                                                    {content.genres.join(', ')}
+                                                </span>
+                                            </td>
+                                            <td>{content.releaseDate.replaceAll('-', '.')}</td>
+                                            <td>
+                                                <span 
+                                                    className={`content-status ${
+                                                        content.status === 'PUBLIC'
+                                                            ? 'is-public'
+                                                            : 'is-private'
+                                                    }`}
+                                                >
+                                                    {content.status === 'PUBLIC' ? '공개' : '비공개'}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                    {totalPages > 1 && (
+                        <Pagination 
+                            currentPage={currentPage} 
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                        />
+                    )}
                 </div>
             </div>
         </div>

@@ -1,0 +1,296 @@
+[
+    {
+        "id": 1,
+        "type": "SERIES",
+        "title": "프렌즈",
+        "thumbnail": "/images/contents/friends.webp",
+        "genres": ["코미디", "로맨스"],
+        "ageRating": "15",
+        "director": "제임스 버로스",
+        "cast": [
+            "제니퍼 애니스턴",
+            "코트니 콕스",
+            "리사 쿠드로",
+            "맷 르블랑",
+            "매튜 페리",
+            "데이비드 슈위머"
+        ],
+        "synopsis": "뉴욕에 사는 여섯 친구가 일과 사랑, 우정을 함께 겪으며 성장하는 시트콤.",
+        "releaseDate": "1994-09-22",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-01T10:00:00+09:00"
+    },
+    {
+        "id": 2,
+        "type": "SERIES",
+        "title": "언젠가는 슬기로울 전공의생활",
+        "thumbnail": "/images/contents/resident-playbook.webp",
+        "genres": ["드라마", "메디컬"],
+        "ageRating": "15",
+        "director": "이민수",
+        "cast": [
+            "고윤정",
+            "신시아",
+            "강유석",
+            "한예지",
+            "정준원"
+        ],
+        "synopsis": "종로 율제병원 산부인과의 신입 전공의들이 서툰 병원 생활 속에서 의사이자 동료로 성장한다.",
+        "releaseDate": "2025-04-12",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-02T11:00:00+09:00"
+    },
+    {
+        "id": 3,
+        "type": "SERIES",
+        "title": "루키",
+        "thumbnail": "/images/contents/the-rookie.webp",
+        "genres": ["범죄", "드라마", "액션"],
+        "ageRating": "15",
+        "director": "리즈 프리들랜더",
+        "cast": [
+            "네이선 필리언",
+            "알리사 디아스",
+            "리차드 T. 존스",
+            "멜리사 오닐",
+            "에릭 윈터"
+        ],
+        "synopsis": "중년에 경찰이라는 꿈에 도전한 존 놀런이 LA 경찰의 신입 경관으로 현장에 적응해 나간다.",
+        "releaseDate": "2018-10-16",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-03T09:30:00+09:00"
+    },
+    {
+        "id": 4,
+        "type": "SERIES",
+        "title": "브루클린 나인-나인",
+        "thumbnail": "/images/contents/brooklyn-nine-nine.webp",
+        "genres": ["코미디", "범죄"],
+        "ageRating": "15",
+        "director": "필 로드, 크리스토퍼 밀러",
+        "cast": [
+            "앤디 샘버그",
+            "안드레 브라우어",
+            "스테파니 베아트리스",
+            "멜리사 푸메로",
+            "테리 크루스"
+        ],
+        "synopsis": "자유분방한 형사 제이크와 개성 넘치는 브루클린 99관할서 동료들이 사건과 일상을 함께 해결한다.",
+        "releaseDate": "2013-09-17",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-04T14:00:00+09:00"
+    },
+    {
+        "id": 5,
+        "type": "SERIES",
+        "title": "흑백요리사: 요리 계급 전쟁",
+        "thumbnail": "/images/contents/culinary-class-wars.webp",
+        "genres": ["예능", "요리", "서바이벌"],
+        "ageRating": "12",
+        "director": "김학민, 김은지",
+        "cast": [
+            "백종원",
+            "안성재"
+        ],
+        "synopsis": "이름을 알린 스타 셰프와 숨은 실력자들이 오직 요리 실력으로 경쟁하는 요리 서바이벌.",
+        "releaseDate": "2024-09-17",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-05T16:00:00+09:00"
+    },
+    {
+        "id": 6,
+        "type": "SERIES",
+        "title": "슬기로운 의사생활",
+        "thumbnail": "/images/contents/hospital-playlist.webp",
+        "genres": ["드라마", "메디컬", "코미디"],
+        "ageRating": "15",
+        "director": "신원호",
+        "cast": [
+            "조정석",
+            "유연석",
+            "정경호",
+            "김대명",
+            "전미도"
+        ],
+        "synopsis": "의대 동기인 다섯 의사가 같은 병원에서 환자를 돌보며 오랜 우정과 평범한 일상을 이어간다.",
+        "releaseDate": "2020-03-12",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-06T10:30:00+09:00"
+    },
+    {
+        "id": 7,
+        "type": "SERIES",
+        "title": "루시퍼",
+        "thumbnail": "/images/contents/lucifer.webp",
+        "genres": ["판타지", "범죄", "드라마"],
+        "ageRating": "19",
+        "director": "렌 와이즈먼",
+        "cast": [
+            "톰 엘리스",
+            "로런 저먼",
+            "케빈 알레한드로",
+            "D. B. 우드사이드",
+            "리즐리앤 브랜트"
+        ],
+        "synopsis": "지옥을 떠나 LA에서 살던 루시퍼가 형사 클로이를 만나 살인 사건 수사를 돕기 시작한다.",
+        "releaseDate": "2016-01-25",
+        "status": "PRIVATE",
+        "createdAt": "2026-10-07T13:00:00+09:00"
+    },
+    {
+        "id": 8,
+        "type": "SERIES",
+        "title": "워킹데드",
+        "thumbnail": "/images/contents/the-walking-dead.webp",
+        "genres": ["호러", "스릴러", "드라마"],
+        "ageRating": "19",
+        "director": "프랭크 다라본트",
+        "cast": [
+            "앤드루 링컨",
+            "노만 리더스",
+            "멀리사 맥브라이드",
+            "로렌 코핸",
+            "스티븐 연"
+        ],
+        "synopsis": "좀비로 무너진 세상에서 깨어난 보안관 릭이 가족과 생존자들을 만나 살아남기 위한 여정을 시작한다.",
+        "releaseDate": "2010-10-31",
+        "status": "PRIVATE",
+        "createdAt": "2026-10-08T15:30:00+09:00"
+    },
+    {
+        "id": 9,
+        "type": "SERIES",
+        "title": "매니페스트",
+        "thumbnail": "/images/contents/manifest.webp",
+        "genres": ["미스터리", "SF", "드라마"],
+        "ageRating": "15",
+        "director": "데이비드 프랭클",
+        "cast": [
+            "멀리사 록스버러",
+            "조시 댈러스",
+            "J. R. 라미레스"
+        ],
+        "synopsis": "착륙 후 5년 넘는 시간이 흘렀다는 사실을 알게 된 항공기 승객들이 기이한 현상과 귀환의 비밀을 추적한다.",
+        "releaseDate": "2018-09-24",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-09T11:00:00+09:00"
+    },
+    {
+        "id": 10,
+        "type": "SERIES",
+        "title": "기묘한 이야기",
+        "thumbnail": "/images/contents/stranger-things.webp",
+        "genres": ["SF", "미스터리", "호러"],
+        "ageRating": "15",
+        "director": "더퍼 형제",
+        "cast": [
+            "위노나 라이더",
+            "데이비드 하버",
+            "밀리 바비 브라운",
+            "핀 울프하드",
+            "게이튼 마타라조"
+        ],
+        "synopsis": "소년의 실종과 초능력 소녀의 등장으로 작은 마을에 숨겨진 실험과 또 다른 세계의 존재가 드러난다.",
+        "releaseDate": "2016-07-15",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-10T17:00:00+09:00"
+    },
+    {
+        "id": 11,
+        "type": "SERIES",
+        "title": "비밀의 숲",
+        "thumbnail": "/images/contents/stranger.webp",
+        "genres": ["범죄", "스릴러", "미스터리"],
+        "ageRating": "15",
+        "director": "안길호",
+        "cast": [
+            "조승우",
+            "배두나",
+            "유재명",
+            "이준혁",
+            "신혜선"
+        ],
+        "synopsis": "감정을 잘 느끼지 못하는 검사 황시목과 형사 한여진이 살인 사건 뒤에 얽힌 조직의 비리를 파헤친다.",
+        "releaseDate": "2017-06-10",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-11T09:00:00+09:00"
+    },
+    {
+        "id": 12,
+        "type": "SERIES",
+        "title": "오티스의 비밀 상담소",
+        "thumbnail": "/images/contents/sex-education.webp",
+        "genres": ["코미디", "드라마", "청춘"],
+        "ageRating": "19",
+        "director": "벤 테일러",
+        "cast": [
+            "에이사 버터필드",
+            "질리언 앤더슨",
+            "슈티 가트와",
+            "에마 매키"
+        ],
+        "synopsis": "성 상담사인 엄마의 영향을 받은 오티스가 동급생 메이브와 함께 친구들의 성과 관계 고민을 상담한다.",
+        "releaseDate": "2019-01-11",
+        "status": "PRIVATE",
+        "createdAt": "2026-10-12T12:30:00+09:00"
+    },
+    {
+        "id": 13,
+        "type": "SERIES",
+        "title": "엄브렐러 아카데미",
+        "thumbnail": "/images/contents/the-umbrella-academy.webp",
+        "genres": ["액션", "SF", "판타지"],
+        "ageRating": "15",
+        "director": "피터 호어",
+        "cast": [
+            "엘리엇 페이지",
+            "톰 호퍼",
+            "데이비드 카스타녜다",
+            "에미 레이버램프먼",
+            "로버트 시한",
+            "에이든 갤러거"
+        ],
+        "synopsis": "아버지의 죽음으로 다시 모인 초능력 남매들이 가족의 비밀과 다가오는 세계 종말에 맞선다.",
+        "releaseDate": "2019-02-15",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-13T14:00:00+09:00"
+    },
+    {
+        "id": 14,
+        "type": "MOVIE",
+        "title": "이웃집 토토로",
+        "thumbnail": "/images/contents/my-neighbor-totoro.webp",
+        "genres": ["애니메이션", "판타지", "가족"],
+        "ageRating": "ALL",
+        "director": "미야자키 하야오",
+        "cast": [
+            "히다카 노리코",
+            "사카모토 치카",
+            "이토이 시게사토"
+        ],
+        "synopsis": "시골로 이사 온 사츠키와 메이 자매가 숲속의 신비한 존재 토토로를 만나 특별한 경험을 한다.",
+        "releaseDate": "1988-04-16",
+        "status": "PUBLIC",
+        "createdAt": "2026-10-14T10:00:00+09:00"
+    },
+    {
+        "id": 15,
+        "type": "SERIES",
+        "title": "그레이 아나토미",
+        "thumbnail": "/images/contents/greys-anatomy.webp",
+        "genres": ["드라마", "메디컬", "로맨스"],
+        "ageRating": "19",
+        "director": "피터 호턴",
+        "cast": [
+            "엘런 폼페이오",
+            "샌드라 오",
+            "캐서린 하이글",
+            "패트릭 뎀프시",
+            "저스틴 체임버스"
+        ],
+        "synopsis": "외과 인턴 메러디스 그레이와 동료 의사들이 치열한 병원 생활 속에서 사랑과 갈등, 성장을 겪는다.",
+        "releaseDate": "2005-03-27",
+        "status": "PRIVATE",
+        "createdAt": "2026-10-15T16:00:00+09:00"
+    }
+]
