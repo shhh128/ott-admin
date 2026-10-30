@@ -27,8 +27,12 @@
     flex-wrap: wrap;
     input, select, button {
         height: 44px;
-        // font: inherit;
+        font: inherit;
         border-radius: 5px;
+        &:focus {
+            outline: 2px solid #555;
+            outline-offset: 1px;
+        }
     }
 }
 .search-box {
@@ -116,6 +120,7 @@
     border: 0;
     background-color: #fff;
     color: #333;
+    font: inherit;
     font-weight: 800;
     cursor: pointer;
     &:hover {
@@ -131,6 +136,11 @@
         padding-right: 35px;
         height: 35px;
         border-radius: 5px;
+        font: inherit;
+        &:focus {
+            outline: 2px solid #555;
+            outline-offset: 1px;
+        }
     }
 }
 .content-table-wrap {
@@ -164,6 +174,13 @@
             padding: 60px 16px;
             color: #777;
         }
+    }
+    input {
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        accent-color: #e50914;
+        cursor: pointer;
     }
 }
 .content-thumbnail {
