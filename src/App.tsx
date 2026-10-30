@@ -3,6 +3,7 @@ import Login from './pages/Login/Login';
 import AdminLayout from './layouts/AdminLayout';
 import Dashboard from './pages/Dashboard/Dashboard';
 import ContentList from './pages/Content/ContentList';
+import ContentAdd from './pages/Content/ContentAdd';
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/content' element={<ContentList />} />
+          <Route path='/content/new' element={<ContentAdd />} />
         </Route>
       </Routes>
 

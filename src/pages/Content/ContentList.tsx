@@ -1,11 +1,13 @@
 import { ChevronDown, Plus, RotateCcw, Search } from 'lucide-react';
 import './Content.scss';
 import { Link } from 'react-router-dom';
-import contents from '../../mock/contents.json';
+import contentData from '../../mock/contents.json';
 import { useState } from 'react';
 import Pagination from '../../components/common/Pagination/Pagination';
 
 export default function ContentList() {
+    const [contents, setContents] = useState(contentData);
+
     const [searchTitle, setSearchTitle] = useState('');
     const [appliedTitle, setAppliedTitle] = useState('');
 
@@ -19,6 +21,8 @@ export default function ContentList() {
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
+
+    const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
     const filteredContents = contents.filter((content)=>{
         const matchesTitle = content.title 
@@ -58,6 +62,42 @@ export default function ContentList() {
         startIndex + itemsPerPage
     );
 
+    const handleSelect = (id: number) => {
+        setSelectedIds((prev) =>
+            prev.includes(id)
+                ? prev.filter((selectedId) => selectedId !== id)
+                : [...prev, id]
+        );
+    };
+
+    const isAllSelected =
+        currentContents.length > 0 &&
+        currentContents.every((content)=>
+            selectedIds.includes(content.id)
+        );
+
+    const handleSelectAll = ()=>{
+        setSelectedIds(
+            isAllSelected
+                ? []
+                : currentContents.map((content)=>content.id)
+        );
+    };
+
+    const handleDeleteSelected = ()=>{
+        const confirmed = window.confirm(
+            `선택한 콘텐츠 ${selectedIds.length}개를 삭제하시겠습니까?`
+        )
+
+        if (!confirmed) return;
+
+        setContents((prev)=>
+            prev.filter((content)=>!selectedIds.includes(content.id))
+        );
+        setSelectedIds([]);
+        setCurrentPage(1);
+    };
+
     return(
         <div className="content-wrap">
             <div className="title">
@@ -78,6 +118,7 @@ export default function ContentList() {
                         setAppliedType(selectedType);
                         setAppliedStatus(selectedStatus);
                         setCurrentPage(1);
+                        setSelectedIds([]);
                     }}
                     onReset={()=>{
                         setSearchTitle('');
@@ -87,6 +128,7 @@ export default function ContentList() {
                         setAppliedType('ALL');
                         setAppliedStatus('ALL');
                         setCurrentPage(1);
+                        setSelectedIds([]);
                     }}
                 >
                     <div className="search-box">
@@ -155,7 +197,8 @@ export default function ContentList() {
                             <button
                                 type='button'
                                 className='delete-btn'
-                                disabled
+                                disabled={selectedIds.length === 0}
+                                onClick={handleDeleteSelected}
                             >
                                 선택 삭제
                             </button>
@@ -169,6 +212,7 @@ export default function ContentList() {
                                 onChange={(e)=>{
                                     setSortOrder(e.target.value);
                                     setCurrentPage(1);
+                                    setSelectedIds([]);
                                 }}
                             >
                                 <option value="CREATED">등록일순</option>
@@ -200,6 +244,9 @@ export default function ContentList() {
                                         <input 
                                             type="checkbox" 
                                             aria-label='현재 페이지 콘텐츠 전체 선택'
+                                            checked={isAllSelected}
+                                            onChange={handleSelectAll}
+                                            disabled={currentContents.length === 0}
                                         />
                                     </th>
                                     <th scope='col'>번호</th>
@@ -225,6 +272,8 @@ export default function ContentList() {
                                                 <input 
                                                     type="checkbox" 
                                                     aria-label={`${content.title} 선택`}
+                                                    checked={selectedIds.includes(content.id)}
+                                                    onChange={()=>handleSelect(content.id)}
                                                 />
                                             </td>
                                             <td>{startIndex + index + 1}</td>
@@ -279,7 +328,10 @@ export default function ContentList() {
                         <Pagination 
                             currentPage={currentPage} 
                             totalPages={totalPages}
-                            onPageChange={setCurrentPage}
+                            onPageChange={(page)=>{
+                                setCurrentPage(page);
+                                setSelectedIds([]);
+                            }}
                         />
                     )}
                 </div>
