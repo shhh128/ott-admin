@@ -1,6 +1,23 @@
 import '../layout/Header.scss';
+import { supabase } from '../../lib/supabase';
 
-export default function Header() {
+interface HeaderProps {
+    email: string;
+}
+
+export default function Header({email}: HeaderProps) {
+    const accountName = email.split('@')[0];
+
+    const handleLogout = async ()=>{
+        const {error} = await supabase.auth.signOut({
+            scope: 'local'
+        });
+
+        if (error){
+            console.error('로그아웃 요청 오류:', error)
+        }
+    }
+
     return(
         <header>
             <div className="logo">
@@ -21,9 +38,15 @@ export default function Header() {
                     </a>
                 </div>
                 <div className='account'>
-                    <a href="/account">
-                        <svg viewBox="0 0 24 24" width="24" height="24" data-icon="UserMedium" data-icon-id=":r45:" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" role="img"><path fill='currentColor' fillRule="evenodd" d="M15 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m2 0A5 5 0 1 1 7 5a5 5 0 0 1 10 0M4 21a8 8 0 1 1 16 0v.514A68 68 0 0 1 12 22a68 68 0 0 1-8-.486zm17.15 2.378-.15-.99.151.99a1 1 0 0 0 .849-.99V21c0-5.523-4.477-10-10-10S2 15.477 2 21v1.389a1 1 0 0 0 .849.988L3 22.39c-.151.988-.15.988-.15.989h.003l.01.002.038.005.142.02q.186.027.535.072A70 70 0 0 0 12 24a70 70 0 0 0 8.422-.523q.35-.045.535-.072l.142-.02.038-.005.01-.002z" clipRule="evenodd"></path></svg>
-                    </a>
+                    <svg viewBox="0 0 24 24" width="24" height="24" data-icon="UserMedium" data-icon-id=":r45:" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" role="img"><path fill='currentColor' fillRule="evenodd" d="M15 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m2 0A5 5 0 1 1 7 5a5 5 0 0 1 10 0M4 21a8 8 0 1 1 16 0v.514A68 68 0 0 1 12 22a68 68 0 0 1-8-.486zm17.15 2.378-.15-.99.151.99a1 1 0 0 0 .849-.99V21c0-5.523-4.477-10-10-10S2 15.477 2 21v1.389a1 1 0 0 0 .849.988L3 22.39c-.151.988-.15.988-.15.989h.003l.01.002.038.005.142.02q.186.027.535.072A70 70 0 0 0 12 24a70 70 0 0 0 8.422-.523q.35-.045.535-.072l.142-.02.038-.005.01-.002z" clipRule="evenodd"></path></svg>
+                    <span className='account-name'>{accountName}</span>
+                    <button 
+                        type='button' 
+                        className='logout-btn'
+                        onClick={handleLogout}
+                    >
+                        로그아웃
+                    </button>
                 </div>
             </div>
         </header>

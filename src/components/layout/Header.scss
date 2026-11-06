@@ -31,18 +31,34 @@ header {
             }
         }
     }
-    .header-menu {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        margin-right: 15px;
-        a {
-            color: #fff;
-            &:hover {
-                path {
-                    fill: #E50914;
-                }
+}
+.header-menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-right: 15px;
+    a {
+        color: #fff;
+        &:hover {
+            path {
+                fill: #E50914;
             }
         }
     }
+}
+.account {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+}
+.logout-btn {
+    padding: 6px 10px;
+    border: 1px solid #666;
+    border-radius: 4px;
+    background-color: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
 }
