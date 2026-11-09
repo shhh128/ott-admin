@@ -6,9 +6,10 @@ import type { ContentInput } from "../../types/content";
 
 interface ContentFormProps {
     onSave: (content: ContentInput)=>void;
+    saving: boolean;
 }
 
-export default function ContentForm({ onSave }: ContentFormProps) {
+export default function ContentForm({ onSave, saving }: ContentFormProps) {
     const [preview, setPreview] = useState('');
 
     const handleThumbnail = (e:ChangeEvent<HTMLInputElement>) => {
@@ -251,7 +252,13 @@ export default function ContentForm({ onSave }: ContentFormProps) {
             </section>
             <div className="form-actions">
                 <Link to="/content" className="cancel-btn">취소</Link>
-                <button type="submit" className="submit-btn">등록</button>
+                <button 
+                    type="submit" 
+                    className="submit-btn"
+                    disabled={saving}
+                >
+                    {saving ? '등록 중...' : '등록'}
+                </button>
             </div>
         </form>
     );

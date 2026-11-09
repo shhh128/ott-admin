@@ -170,4 +170,8 @@
 .submit-btn {
     background-color: #e50914;
     color: #fff;
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
 }
