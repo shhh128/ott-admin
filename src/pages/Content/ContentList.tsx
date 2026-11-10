@@ -1,12 +1,13 @@
 import { ChevronDown, Plus, RotateCcw, Search } from 'lucide-react';
 import './Content.scss';
 import { Link } from 'react-router-dom';
-import contentData from '../../mock/contents.json';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Pagination from '../../components/common/Pagination/Pagination';
+import { getContents } from '../../api/contentApi';
+import type { ContentItem } from '../../types/content';
 
 export default function ContentList() {
-    const [contents, setContents] = useState(contentData);
+    const [contents, setContents] = useState<ContentItem[]>([]);
 
     const [searchTitle, setSearchTitle] = useState('');
     const [appliedTitle, setAppliedTitle] = useState('');
@@ -23,6 +24,21 @@ export default function ContentList() {
     const itemsPerPage = 10;
 
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
+    useEffect(()=>{
+        async function loadContents() {
+            try {
+                const data = await getContents();
+
+                setContents(data);
+            }
+            catch (error){
+                console.error('콘텐츠 조회 실패:', error)
+            }
+        }
+
+        loadContents();
+    }, []);
 
     const filteredContents = contents.filter((content)=>{
         const matchesTitle = content.title 
@@ -281,7 +297,7 @@ export default function ContentList() {
                                                 <Link to={`/content/${content.id}/edit`} aria-label={`${content.title} 수정`}>
                                                     <img 
                                                         className='content-thumbnail'
-                                                        src={content.thumbnail} 
+                                                        src={content.thumbnailUrl} 
                                                         alt={`${content.title} 썸네일`} 
                                                     />
                                                 </Link>

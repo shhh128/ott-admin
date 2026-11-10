@@ -126,8 +126,9 @@ export default function ContentForm({ onSave, saving }: ContentFormProps) {
                         <legend>장르</legend>
                         <div className="genre-options">
                             {[
-                                '드라마', '예능', '시트콤', '로맨스', '코미디', '액션',
-                    'SF', '판타지', '애니메이션', '범죄', '스릴러', '메티컬'
+                                '한국 드라마', '해외 드라마', '드라마', '예능', '시트콤',
+                                '로맨스', '코미디', '메디컬', '범죄', '스릴러',
+                                '액션', 'SF', '판타지', '애니메이션'
                             ].map((genre)=>(
                                 <label key={genre}>
                                     <input 

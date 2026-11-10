@@ -3,10 +3,13 @@ import ContentForm from '../../components/content/ContentForm'
 import type { ContentInput } from '../../types/content'
 import { uploadThumbnail, addContent, removeThumbnail } from '../../api/contentApi';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function ContentAdd() {
 
     const [saving, setSaving] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleAdd = async (content: ContentInput)=>{
         if (saving) return;
@@ -39,6 +42,7 @@ export default function ContentAdd() {
         }
 
         alert('콘텐츠가 등록되었습니다.');
+        navigate('/content', {replace: true});
     };
     
     return(
