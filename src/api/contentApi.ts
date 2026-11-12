@@ -89,3 +89,19 @@ export async function getThumbnailUrl(path: string) {
 
     return data.signedUrl;
 }
+
+export async function deleteContents(ids: number[]) {
+    if (ids.length === 0) return [];
+
+    const {data, error} = await supabase
+        .from('contents')
+        .delete()
+        .in('id', ids)
+        .select('id, thumbnail');
+
+    if (error){
+        throw error;
+    }
+
+    return data;
+}

@@ -3,7 +3,7 @@ import './Content.scss';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Pagination from '../../components/common/Pagination/Pagination';
-import { getContents } from '../../api/contentApi';
+import { getContents, deleteContents, removeThumbnail } from '../../api/contentApi';
 import type { ContentItem } from '../../types/content';
 
 export default function ContentList() {
@@ -100,18 +100,45 @@ export default function ContentList() {
         );
     };
 
-    const handleDeleteSelected = ()=>{
+    const handleDeleteSelected = async ()=>{
+        if (selectedIds.length === 0) return;
+
         const confirmed = window.confirm(
             `선택한 콘텐츠 ${selectedIds.length}개를 삭제하시겠습니까?`
         )
 
         if (!confirmed) return;
 
-        setContents((prev)=>
-            prev.filter((content)=>!selectedIds.includes(content.id))
-        );
-        setSelectedIds([]);
-        setCurrentPage(1);
+        try {
+            const deleted = await deleteContents(selectedIds);
+
+            if (deleted.length === 0){
+                alert('삭제된 콘텐츠가 없습니다. 목록을 새로고침해주세요.');
+                return;
+            }
+
+            const deletedIds = deleted.map((content) => content.id);
+
+            setContents((prev)=>
+                prev.filter((content)=>!deletedIds.includes(content.id))
+            );
+
+            setSelectedIds([]);
+            setCurrentPage(1);
+
+            const results = await Promise.allSettled(
+                deleted.map((content) => removeThumbnail(content.thumbnail))
+            );
+
+            if (results.some((result) => result.status === 'rejected')){
+                console.error('이미지 정리 결과:', results);
+                alert('콘텐츠는 삭제되었지만 일부 이미지 정리에 실패했습니다.');
+            }
+        }
+        catch (error){
+            console.error('콘텐츠 삭제 실패:', error);
+            alert('콘텐츠 삭제에 실패했습니다. 다시 시도해주세요.');
+        }
     };
 
     return(
