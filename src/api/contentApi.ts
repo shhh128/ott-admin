@@ -56,12 +56,12 @@ export async function getContents() {
         .select('*')
         .order('created_at', {ascending: false});
 
-    if (error){
-        throw error;
-    }
+    if (error) throw error;
 
-    return Promise.all(
-        data.map(async (item): Promise<ContentItem>=>({
+    const paths = data.map((item) => item.thumbnail);
+    const thumbnails = await getThumbnailUrls(paths);
+
+    return data.map((item): ContentItem => ({
             id: item.id,
             title: item.title,
             type: item.type,
@@ -73,21 +73,11 @@ export async function getContents() {
             releaseDate: item.release_date,
             status: item.status,
             thumbnail: item.thumbnail,
-            thumbnailUrl: await getThumbnailUrl(item.thumbnail),
+            thumbnailUrl: thumbnails.find(
+                (image) => image.path === item.thumbnail
+            )?.signedUrl ?? '',
             createdAt: item.created_at
         }))
-    );
-}
-
-export async function getThumbnailUrl(path: string) {
-    const {data, error} = await supabase.storage
-        .from('content-images')
-        .createSignedUrl(path, 3600)
-    if (error){
-        throw error;
-    }
-
-    return data.signedUrl;
 }
 
 export async function deleteContents(ids: number[]) {
@@ -102,6 +92,18 @@ export async function deleteContents(ids: number[]) {
     if (error){
         throw error;
     }
+
+    return data;
+}
+
+export async function getThumbnailUrls(paths: string[]) {
+    if (paths.length === 0) return [];
+
+    const {data, error} = await supabase.storage
+        .from('content-images')
+        .createSignedUrls(paths, 3600);
+
+    if (error) throw error;
 
     return data;
 }
