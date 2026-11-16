@@ -47,7 +47,7 @@ export default function ContentList() {
         const matchesTitle = content.title 
             .replace(/\s+/g, '')
             .toLowerCase()
-            .includes(appliedTitle.trim().toLowerCase());
+            .includes(appliedTitle.replace(/\s+/g, '').toLowerCase());
 
         const matchesType =
             appliedType === 'ALL' || content.type === appliedType;
