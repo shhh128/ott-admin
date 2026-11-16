@@ -1,5 +1,6 @@
 import '../layout/Header.scss';
 import { supabase } from '../../lib/supabase';
+import logo from '../../assets/images/Netflix_Logo.png';
 
 interface HeaderProps {
     email: string;
@@ -27,7 +28,7 @@ export default function Header({email}: HeaderProps) {
         <header>
             <div className="logo">
                 <a href="/dashboard">
-                    <img src="/src/assets/images/Netflix_Logo.png" alt="넷플릭스 로고" />
+                    <img src={logo} alt="로고" />
                     <p>ADMIN</p>
                 </a>
             </div>
