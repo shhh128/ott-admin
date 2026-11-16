@@ -8,6 +8,7 @@ import type { ContentItem } from '../../types/content';
 
 export default function ContentList() {
     const [contents, setContents] = useState<ContentItem[]>([]);
+    const [loading, setLoading] = useState(true);
 
     const [searchTitle, setSearchTitle] = useState('');
     const [appliedTitle, setAppliedTitle] = useState('');
@@ -29,11 +30,13 @@ export default function ContentList() {
         async function loadContents() {
             try {
                 const data = await getContents();
-
                 setContents(data);
             }
             catch (error){
                 console.error('콘텐츠 조회 실패:', error)
+            }
+            finally {
+                setLoading(false);
             }
         }
 
@@ -302,7 +305,13 @@ export default function ContentList() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredContents.length === 0 ? (
+                                {loading ? (
+                                    <tr>
+                                        <td colSpan={8} className='empty-message'>
+                                            불러오는 중...
+                                        </td>
+                                    </tr>
+                                ) : filteredContents.length === 0 ? (
                                     <tr>
                                         <td colSpan={8} className='empty-message'>
                                             검색 조건에 맞는 콘텐츠가 없습니다.

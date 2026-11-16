@@ -45,17 +45,6 @@
         text-align: center;
         color: #fff;
     }
-    p {
-        font-size: 11px;
-        color: #999;
-        line-height: 1.2;
-        a {
-            color: #999;
-            &:hover {
-                text-decoration: underline;
-            }
-        }
-    }
 }
 form {
     width: 100%;
@@ -102,6 +91,43 @@ form {
         &:hover {
             background-color: #bd0d16;
             border: 1px solid #bd0d16;
+        }
+    }
+}
+// .demo-guide {
+//     p {
+//         font-size: 11px;
+//         color: #999;
+//         line-height: 1.4;
+//     }
+//     button {
+
+//     }
+// }
+.demo-guide {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid #333;
+    text-align: center;
+    font-size: 13px;
+    p {
+        color: #b3b3b3;
+        line-height: 1.5;
+        word-break: keep-all;
+    }
+    button {
+        margin-top: 9px;
+        padding: 10px 20px;
+        border: 1px solid #777;
+        border-radius: 6px;
+        background: transparent;
+        color: #eee;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.2s;
+        &:hover {
+            background-color: #222;
+            border-color: #bbb;
         }
     }
 }

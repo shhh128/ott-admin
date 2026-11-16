@@ -25,7 +25,7 @@ export default function AdminLayout() {
     }, []);
 
     if (loading){
-        return <p>로그인 상태를 확인하고 있습니다.</p>
+        return <p>로그인 상태를 확인하고 있습니다...</p>
     }
 
     if (!session){

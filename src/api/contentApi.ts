@@ -107,3 +107,13 @@ export async function getThumbnailUrls(paths: string[]) {
 
     return data;
 }
+
+export async function getContentCount() {
+    const {count, error} = await supabase
+        .from('contents')
+        .select('*', {count: 'exact', head:true});
+    
+    if (error) throw error;
+
+    return count ?? 0
+}

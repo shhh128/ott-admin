@@ -35,7 +35,7 @@ export default function Sidebar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/wish" className="menu-list">
+                        <NavLink to="/content-request" className="menu-list">
                             <MessageSquareHeart className="menu-icon" />
                             <span>공개 요청 콘텐츠</span>
                         </NavLink>
@@ -43,7 +43,7 @@ export default function Sidebar() {
                 </ul>
                 <ul>
                     <li>
-                        <NavLink to="/user" className="menu-list">
+                        <NavLink to="/member" className="menu-list">
                             <UsersRound className="menu-icon" />
                             <span>회원 관리</span>
                         </NavLink>

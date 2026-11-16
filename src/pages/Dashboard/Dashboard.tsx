@@ -4,18 +4,29 @@ import './Dashboard.scss';
 import PieChart from '../../components/charts/PieChart';
 import BarChart from '../../components/charts/BarChart';
 import LineChart from '../../components/charts/LineChart';
+import { useEffect, useState } from 'react';
+import { getContentCount } from '../../api/contentApi';
 
 export default function Dashboard() {
+
+    const [contentCount, setContentCount] = useState<number | null>(null);
 
     const now = new Date();
     const dateText = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}시 기준입니다.`;
     // yy.mm.dd hh
     // const dateText = `${String(now.getFullYear()).slice(-2)}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}시 기준입니다.`;
 
+    useEffect(()=>{
+        getContentCount()
+            .then(setContentCount)
+            .catch(console.error);
+    }, []);
+
     return(
         <div className="dashboard-wrap">
             <div className="title">
                 <h3>대시보드</h3>
+                <p>* 총 콘텐츠 수 외에는 샘플 데이터입니다.</p>
             </div>
             <div className="contents">
                 <div className="grid-wrap">
@@ -25,7 +36,7 @@ export default function Dashboard() {
                             <h5>총 콘텐츠 수</h5>
                         </div>
                         <div className="box-contents">
-                            <p>1,236개</p>
+                            <p>{contentCount === null ? '-' : `${contentCount.toLocaleString()}개`}</p>
                             <Link to="/content" className='shortcut'>
                                 <CircleChevronRight />
                             </Link>
@@ -47,7 +58,7 @@ export default function Dashboard() {
                         </div>
                         <div className="box-contents">
                             <p>2,458명</p>
-                            <Link to="/user" className='shortcut'>
+                            <Link to="/member" className='shortcut'>
                                 <CircleChevronRight />
                             </Link>
                         </div>
