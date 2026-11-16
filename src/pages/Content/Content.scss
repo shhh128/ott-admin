@@ -117,11 +117,12 @@
 }
 .delete-btn {
     padding: 7px 12px;
-    border: 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     background-color: #fff;
     color: #333;
     font: inherit;
-    font-weight: 800;
+    font-weight: 700;
     cursor: pointer;
     &:hover {
         background-color: #eee;
